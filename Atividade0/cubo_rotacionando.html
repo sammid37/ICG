@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Samantha Dantas Medeiros">
+    
+    <title>Atividade 0 - Cubo Rotacionando</title>
+  
+    <!-- CSS ------------------------------------------->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poller+One&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet"> 
+    <style>
+        body{
+            font-family: 'Tenor Sans', sans-serif;
+            color: #797A7E;
+            background-color: #fafafa;
+        }
+        h1{
+            margin-top: 3%;
+            /* color: #7394ff; */
+            text-align: center;
+            /* font-family: 'Poller One', cursive; */
+            /* font-size: 80px; */
+        }
+        p {
+            letter-spacing: 3px;
+            text-align: center;
+        }
+        footer {
+            letter-spacing: 3px;
+            text-align: center;
+        }
+        a {
+            color: #f85f73ad;
+            background-color: #fcd8d444;
+            padding: 3px;
+            border-radius: 3px;
+            text-decoration: none;
+            transition: 0.8s;
+        }
+        a:hover {
+            color:#F85F73;
+        }
+        #outro {
+            color: #797A7E;
+            background-color: #3737371e;
+        }
+        #navegar {
+            /* font-size: 21px; */
+            text-align: center;
+            max-width: 310px;
+            background-color: #fcd8d444;
+        }
+        #navegar a{
+            color: #f85f73ad;
+            background-color: transparent;
+        }
+        /* canvas {
+            width: 100%;
+            height: 40%;
+            border: 1px solid #eee;
+            background-color: white;
+        } */
+    </style>
+</head>
+<body>
+    <!-- <div id="navegar">
+        <a href="/Atividade 0/cubo_estatico.html" title="Cubo Estático"> « questão anterior </a>
+        <a href="/Atividade 0/" title="/Atividade_0/"> ✺ </a>
+        <a href="/Atividade 0/cubo_rotacionando.html" title="Cubo Rotacionando"> próxima questão » </a>
+    </div> -->
+    <h1>Cubo Rotacionando</h1>
+    <center>
+        <div class="container" id="q1"></div>
+    </center>
+    <br>
+    <footer>{ Samantha Dantas Medeiros ヽ 08.2021 ✦ <a href="https://github.com/sammid37">GitHub</a> }</footer>
+    <br>
+    <footer>
+            made with 
+            <i><a id="outro" href="http://getskeleton.com/">skeleton</a> 
+            and 
+            <i><a id="outro" href="https://threejs.org/">ThreeJS</a></i>.
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        function cuboE(){
+            var scene = new THREE.Scene();
+            // PerspectiveCamera(,,near, fear) são os limites da renderização em pixels
+            var camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000);
+            camera.position.z = 500; // profundidade da câmera
+
+            // definindo o meu objeto e o material
+            var geometry = new THREE.BoxGeometry(200,200,200);
+            var material = new THREE.MeshBasicMaterial({ color: 0x24A19C, wireframe: true});
+            var cube = new THREE.Mesh(geometry, material);
+            scene.add( cube ); // adicionando o objeto à cena
+
+            // renderização
+            var renderer = new THREE.WebGLRenderer({antialias:true});
+            renderer.setClearColor(0xB7EFCD);
+            renderer.setSize(700,310);
+
+            // exibição
+            const exibir = document.getElementById('q1');
+            exibir.appendChild(renderer.domElement);            
+            
+            // animação, rotacionando
+            function animate(){
+                // atualização de frame
+                requestAnimationFrame(animate);
+
+                // animação de rotação 
+                // cube.rotation.z += 0.01;
+                cube.rotation.x += 0.01;
+                cube.rotation.y += 0.02;
+
+                // renderizando a cena e a câmera
+                renderer.render(scene,camera);
+
+            }
+            animate();
+            renderer.render(scene, camera);
+
+        }
+        window.onload = cuboE;
+    </script>
+</body>
+</html>

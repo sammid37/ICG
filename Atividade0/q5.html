@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Samantha Dantas Medeiros">
+
+    <title>Atividade 0 - Questão 05</title>
+    <!-- 
+        Crie  desenhos  diretamente  em  um  elemento <canvas> de  uma  p ́agina  HTML,  
+        em  tempo  de execução, utilizando JavaScript. 
+    -->
+
+    <!-- CSS ------------------------------------------->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poller+One&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet"> 
+    <style>
+        body{
+            font-family: 'Tenor Sans', sans-serif;
+            color: #797A7E;
+            background-color: #fafafa;
+        }
+        h1{
+            margin-top: 37px;
+            cursor: pointer;
+            text-align: center;
+            /* font-family: 'Poller One', cursive; */
+            /* font-size: 80px; */
+        }
+        footer {
+            letter-spacing: 3px;
+            text-align: center;
+        }
+        a {
+            color: #f85f73ad;
+            background-color: #fcd8d444;
+            padding: 3px;
+            border-radius: 3px;
+            text-decoration: none;
+            transition: 0.8s;
+        }
+        a:hover {
+            color:#F85F73;
+        }
+        #skeleton {
+            color: #797A7E;
+            background-color: #3737371e;
+        }
+        #navegar {
+            /* font-size: 21px; */
+            text-align: center;
+            max-width: 310px;
+            background-color: #fcd8d444;
+        }
+        #navegar a{
+            color: #f85f73ad;
+            background-color: transparent;
+        }
+    </style>
+    
+</head>
+<body></body>
+    <!-- <div id="navegar">
+        <a href="/Atividade 0/q4.html" title="Questão 4"> « questão anterior </a>
+        <a href="/Atividade 0/" title="/Atividade_0/"> ✺ </a>
+        <a href="/Atividade 0/cubos_estatico.html" title="Cubo Estático"> próxima questão » </a>
+    </div> -->
+    <div class="container">
+        <h1>Desenhando em um elemento canvas </h1>
+        <center>
+            <canvas id="minhatela" width="180" height="250"  style="border:1px solid #d3d3d3;"></canvas>
+        </center>
+    </div>
+    <br><br>
+    <footer>{ Samantha Dantas Medeiros ヽ 08.2021 ✦ <a href="https://github.com/sammid37">GitHub</a> }</footer>
+    <br>
+    <footer>made with <i><a id="skeleton" href="http://getskeleton.com/">skeleton</a></i></footer>
+
+    <script>
+        var tela = document.getElementById("minhatela");
+        var lapis = tela.getContext("2d");
+        lapis.beginPath();
+        /*
+        Observações: 
+        * para fazer linhas retas horizontais: nunca mude o y
+        * para fazer linhas retas verticais: nunca mude o x
+        * para fazer linhas anguladas, o x e o y precisam estar diferente no moveTo() e lineTo()
+        */
+
+        // mandíbulas
+            // esquerda
+            lapis.moveTo(40,50);
+            lapis.lineTo(60,70);
+            lapis.moveTo(50,50);
+            lapis.lineTo(70,70);
+
+            lapis.moveTo(40,50);
+            lapis.lineTo(60,20);
+            lapis.moveTo(50,50);
+            lapis.lineTo(70,20);
+
+            // direita
+            lapis.moveTo(130,50);
+            lapis.lineTo(110,70);
+            lapis.moveTo(140,50);
+            lapis.lineTo(120,70);
+
+            lapis.moveTo(120,20);
+            lapis.lineTo(140,50);
+            lapis.moveTo(110,20);
+            lapis.lineTo(130,50);
+
+            // linha reta
+            lapis.moveTo(60,20);
+            lapis.lineTo(70,20);
+            lapis.moveTo(110,20);
+            lapis.lineTo(120,20);
+
+        // cabeça
+        lapis.moveTo(60,70);
+        lapis.lineTo(120,70);
+        lapis.moveTo(60, 70);
+        lapis.lineTo(60, 120);
+        lapis.lineTo(120, 120);
+        lapis.moveTo(120, 70);
+        lapis.lineTo(120, 120);
+
+        // olhos
+            // esquerdo
+            lapis.moveTo(70,100);
+            lapis.lineTo(80,100);
+            lapis.moveTo(70,110);
+            lapis.lineTo(70,100)
+            lapis.moveTo(80,110);
+            lapis.lineTo(80,100);
+            lapis.moveTo(70,110);
+            lapis.lineTo(80,110);
+
+            // direito
+            lapis.moveTo(100,100);
+            lapis.lineTo(110,100);
+            lapis.moveTo(100,110);
+            lapis.lineTo(100,100);
+            lapis.moveTo(110,110);
+            lapis.lineTo(110,100);
+            lapis.moveTo(100,110);
+            lapis.lineTo(110,110);
+
+        // corpo
+        lapis.moveTo(60,180);
+        lapis.lineTo(75,120);
+        lapis.moveTo(120,180);
+        lapis.lineTo(105,120);
+
+        // capa
+        lapis.moveTo(70,180);
+        lapis.lineTo(90,120);
+        lapis.moveTo(80,180);
+        lapis.lineTo(100,120);
+        lapis.moveTo(96,130);
+        lapis.lineTo(105,180);
+        lapis.moveTo(60,180);
+        lapis.lineTo(120,180);
+
+        // pes
+            // esquerdo
+            lapis.moveTo(70,180);
+            lapis.lineTo(70,200);
+            lapis.moveTo(80,180);
+            lapis.lineTo(80,200);
+            lapis.moveTo(70,200);
+            lapis.lineTo(80,200);
+
+            // direito
+            lapis.moveTo(100,180);
+            lapis.lineTo(100,200);
+            lapis.moveTo(110,180);
+            lapis.lineTo(110,200);
+            lapis.lineTo(100,200);
+            lapis.lineTo(110,200);
+
+        // chão
+        lapis.moveTo(0,200);
+        lapis.lineTo(250,200);
+
+        // fim do desenho
+        lapis.stroke();
+        
+    </script>
+</body>
+</html>

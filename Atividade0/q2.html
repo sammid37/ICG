@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Samantha Dantas Medeiros">
+
+    <title>Atividade 0 - Questão 02</title>
+    <!-- 
+        Escreva  um  programa  que  calcule  a  quantidade  de  n ́umeros  pares  em  um
+        array contendo  10n ́umeros inteiros positivos gerados randomicamente. 
+    -->
+
+    <!-- CSS ------------------------------------------->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poller+One&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet"> 
+    <style>
+        body{
+            font-family: 'Tenor Sans', sans-serif;
+            color: #797A7E;
+            background-color: #fafafa;
+        }
+        h1{
+            color: #7394ff;
+            /* margin-top: 21%; */
+            /* text-align: center; */
+            font-family: 'Poller One', cursive;
+            /* letter-spacing: 12px; */
+        }
+        footer {
+            letter-spacing: 3px;
+            text-align: center;
+        }
+        a {
+            color: #f85f73ad;
+            background-color: #fcd8d444;
+            padding: 3px;
+            border-radius: 3px;
+            text-decoration: none;
+            transition: 0.8s;
+        }
+        a:hover {
+            color:#F85F73;
+        }
+        #skeleton {
+            color: #797A7E;
+            background-color: #3737371e;
+        }
+        #meuarray, #arraypares {
+            margin: auto;
+            width: 100%;
+            color: #373737;
+            text-align: center;
+            /* font-family: "Poller One", cursive; */
+            font-size: 24px;
+            padding: 3px;
+            /* border: 1px solid #eee;
+            border-radius: 15px; */
+            letter-spacing: 3px;
+        }
+        #navegar {
+            /* font-size: 21px; */
+            text-align: center;
+            /* width: 500px; */
+            max-width: 310px;
+            background-color: #fcd8d444;
+        }
+        #navegar a{
+            color: #f85f73ad;
+            background-color: transparent;
+        }
+    </style>
+
+    
+</head>
+<body>
+    <!-- <div id="navegar">
+        <a href="/Atividade 0/q1.html" title="Questão 1"> « questão anterior </a>
+        <a href="/Atividade 0/" title="início" style="margin-left: 12px; margin-right: 12px;">✺ início ✺</a>
+        <a href="/Atividade 0/q3.js" title="Questão 3"> próxima questão » </a>
+    </div> -->
+    <div class="container">
+        <div class="row" style="margin-top: 7%">
+            <div class="eight columns">
+                <h1>Q2 Array</h1>
+                <p>Por favor informe um valor <b>mínimo</b> e um valor <b>máximo</b> nas caixas ao lado.
+                    Esses valores serão utlizados para gerar 10 números aleatórios para preencher
+                    um vetor e em seguida gerar um outro vetor contendo apenas os números pares e positivos
+                    do vetor original.
+                </p>
+            </div>
+            <div class="four columns">
+                <label>Mínimo</label>
+                <input type="number" placeholder="Informe um valor mínimo" id="minimo">
+                <label>Máximo</label>
+                <input type="number" placeholder="Informe um valor máximo" id="maximo">
+                <br>
+                <input type="submit" value="Gerar Array" onclick="preencherVetores()">
+            </div>
+        </div>
+        <br>
+        <br>
+        <div id="meuarray" title="Array original"></div>
+        <br><br>
+        <div id="arraypares" title="Array com números pares e positivos"></div>
+        <br>
+        <br>
+        <footer>{ Samantha Dantas Medeiros ヽ 08.2021 ✦ <a href="https://github.com/sammid37">GitHub</a> }</footer>
+        <br>
+        <footer>made with <i><a id="skeleton" href="http://getskeleton.com/">skeleton</a></i></footer>
+    </div>
+    <!--  JavaScript ------------------------------------------->
+    <script>
+        function preencherVetores(){
+            // pegando o valor armazenado e transformando em inteiro (+)
+            var min = +document.getElementById("minimo").value;
+            var max = +document.getElementById("maximo").value;
+            console.log(min);
+            console.log(max);
+
+            if(min > max || min == max){
+                alert("Preencha os campos corretamente!");
+                document.getElementById('minimo').value = ''
+                document.getElementById('maximo').value = ''
+                return;
+            }
+
+            // gerando números aleatórios
+            function randomizar(){
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            let array = []; // Array vazio que vai armazenar números aleatórios
+            // Preenchendo o array original
+            for (let i = 0 ; i < 10 ; i++){
+                array.push(randomizar(min,max)); 
+            }
+            console.log(array);
+
+            document.getElementById("meuarray").innerHTML = array;
+            document.getElementById("meuarray").style.border = "1px solid #eee";
+            document.getElementById("meuarray").style.borderRadius = "12px";
+            let pares = [];
+            for (let i = 0; i < array.length; i++){
+                if(array[i] % 2 == 0 && array[i] > 0){
+                    pares.push(array[i])
+                    console.log(array[i])
+                } else {
+                    console.log("Nenhum número par positivo aqui.")
+                }
+            }
+            // Escrevendo o resultado no HTML
+            if (pares.length > 0){
+                document.getElementById("arraypares").innerHTML = pares;
+            } else {
+                document.getElementById("arraypares").innerHTML = "Não foram encontrados números pares positivos.";
+            }
+            document.getElementById("arraypares").style.border = "1px solid #eee";
+            document.getElementById("arraypares").style.borderRadius = "12px";
+
+        }
+    </script>
+</body>
+</html>

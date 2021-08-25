@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Samantha Dantas Medeiros">
+
+    <title>Atividade 0 - Questão 04</title>
+    <!-- CSS ------------------------------------------->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poller+One&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet"> 
+    <style>
+        body{
+            font-family: 'Tenor Sans', sans-serif;
+            color: #797A7E;
+            background-color: #fafafa;
+        }
+        h1{
+            margin-top: 21%;
+            cursor: pointer;
+            text-align: center;
+            /* font-family: 'Poller One', cursive; */
+            /* font-size: 80px; */
+        }
+        footer {
+            letter-spacing: 3px;
+            text-align: center;
+        }
+        a {
+            color: #f85f73ad;
+            background-color: #fcd8d444;
+            padding: 3px;
+            border-radius: 3px;
+            text-decoration: none;
+            transition: 0.8s;
+        }
+        a:hover {
+            color:#F85F73;
+        }
+        #skeleton {
+            color: #797A7E;
+            background-color: #3737371e;
+        }
+        #navegar {
+            /* font-size: 21px; */
+            text-align: center;
+            max-width: 310px;
+
+            background-color: #fcd8d444;
+        }
+        #navegar a{
+            color: #f85f73ad;
+            background-color: transparent;
+        }
+
+        input{
+            margin: 5px;
+        }
+        .vetor{
+            width: 100px;
+        }
+        .matriz{
+            width: 80%; 
+        }
+        b{
+            color:#7394ff;
+            /* font-weight: bolder; */
+        }
+
+    
+    </style>
+</head>
+<body>
+    <!-- <div id="navegar">
+        <a href="/Atividade 0/q3.js/" title="Questão 3"> « questão anterior </a>
+        <a href="/Atividade 0/" title="/Atividade_0/"> ✺ </a>
+        <a href="/Atividade 0/q5.html/" title="Questão 5"> próxima questão » </a>
+    </div> -->
+    <div class="container">
+        <div class="row">
+            <div class="six columns">
+                <!-- VETORES -->
+                <h1>Vetor</h1>
+                <center>
+                    <input type="number" name="" class="vetor" id="vetor-x1" placeholder="x1">
+                    <input type="number" name="" class="vetor" id="vetor-y1" placeholder="y1">
+                    <input type="number" name="" class="vetor" id="vetor-z1" placeholder="z1">
+                    <br><br>
+                    <!-- <br> 
+                    
+                    <p>Vetor #2</p> -->
+                    <input type="number" name="" class="vetor" id="vetor-x2" placeholder="x2">
+                    <input type="number" name="" class="vetor" id="vetor-y2" placeholder="y2">
+                    <input type="number" name="" class="vetor" id="vetor-z2" placeholder="z2">
+                    <br><br>
+                    <input type="button" value="Realizar Cálculos Vetoriais" onclick="calculoVetorial()">
+                    <br><br>
+                    <div id="calculosvetoriais">Os resultados serão exibidos aqui.</div>
+                </center>
+            </div>
+            <!-- MATRIZES -->
+            <div class="six columns">
+                <h1>Matriz</h1>
+                <center>
+                    <input type="text" name="" class="matriz" id="matriz-a1" placeholder="a11, a12, a13 (ex: 1,2,3)">
+                    <br>
+                    <input type="text" name="" class="matriz" id="matriz-a2" placeholder="a21, a22, a23 (ex: 4,5,6)">
+                    <br>
+                    <input type="text" name="" class="matriz" id="matriz-a3" placeholder="a31, a32, a33 (ex: 7,8,9)">
+                    <br><br>
+                    <input type="button" value="Realizar Cálculos Matriciais" onclick="calculoMatriz()">
+                    <br><br>
+                    <!-- <div id="calculosmatriciais">Os resultados serão exibidos aqui.</div> -->
+                    <br>
+                    <div id="suamatrizaqui"></div>
+
+                </center>
+
+            </div>
+        </div>
+        <br><br>
+        <footer>{ Samantha Dantas Medeiros ヽ 08.2021 ✦ <a href="https://github.com/sammid37">GitHub</a> }</footer>
+        <br>
+        <footer>made with <i><a id="skeleton" href="http://getskeleton.com/">skeleton</a></i></footer>
+    </div>
+    <!--  JavaScript ------------------------------------------->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.0.0/math.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.js" integrity="sha512-XTa+nLKjbTCUazCWzwYpykjsTQDaepuKlg9YToCij7+Bdi9aHQhBQlV0rfnYmactJjHdusRQQV+6qWNNv0BScA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // Classe Vetor e suas respectivas operações
+        function calculoVetorial(){
+            class Vetor {
+                // Vetores possuem coordenadas x, y, z
+                constructor(x, y, z) {
+                    this.x = x;
+                    this.y = y;
+                    this.z = z;
+                }
+                // cálculo da norma de um vetor
+                static norma(v){
+                    const norma = Math.sqrt(Math.pow(v.x,2) + Math.pow(v.y,2) + Math.pow(v.z,2));
+                    return norma;
+                }
+                // Cálculo do produto vetorial (corss)
+                static produto(v,u){
+                    const produto = math.cross(v,u);
+                    return produto;
+                }
+                // Cálculo do produto escarlar (dot)
+                static escalar(v,u){
+                    const escalar = math.dot(v,u);
+                    return escalar;
+                }
+            }
+            // Pegando as coordenadas dos vetores V e U
+            // o sinal de + certifica que o valor pego será inteiro
+            var x1 = +document.getElementById("vetor-x1").value;
+            var y1 = +document.getElementById("vetor-y1").value;
+            var z1 = +document.getElementById("vetor-z1").value;
+            var x2 = +document.getElementById("vetor-x2").value;
+            var y2 = +document.getElementById("vetor-y2").value;
+            var z2 = +document.getElementById("vetor-z2").value;
+
+            // print das coordenadas do vetor v
+            console.log(x1);
+            console.log(y1);
+            console.log(z1);
+            // print das coordenadas do vetor u
+            console.log(x2);
+            console.log(y2);
+            console.log(z2);
+
+            // criando objetos da classe vetor
+            var vetorV = new Vetor(x1,y1,z1);
+            var vetorU = new Vetor(x2,y2,z2);
+
+            // O método Object.keys() retorna um array de propriedades enumeraveis 
+            // de um determinado objeto
+            var v = Object.keys(vetorV).map(function(key){
+                return vetorV[key];
+            });
+            var u = Object.keys(vetorU).map(function(key){
+                return vetorU[key];
+            });
+
+            // imprimindo em tela os resultados: 
+            //* norma do vetor v, produto vetorial(v,u) e produto escalar(v,u) 
+            document.getElementById("calculosvetoriais").innerHTML=
+                "<b>Norma do vetor(v): </b>" 
+                + Vetor.norma(vetorV) + 
+                "<br><b>Produto vetorial(v,u): </b>" 
+                + Vetor.produto(v,u) + 
+                "<br><b>Produto escalar(v,u): </b>" 
+                + Vetor.escalar(v,u);
+
+            // e impressão dos resultados no console
+            console.log(Vetor.norma(VetorV));
+            console.log(Vetor.produto(v,u));
+            console.log(Vetor.escalar(v,u));
+        }
+       
+        // Classe Matriz e suas respectivas operações
+        function calculoMatriz(){
+            class Matriz {
+                constructor(a1, a2, a3) {
+                    this.a1 = a1; // vetor de tamanho 3
+                    this.a2 = a2; // vetor de tamanho 3
+                    this.a3 = a3; // vetor de tamanho 3
+                }
+                
+            }
+            // obtendo valores (string)
+            var linha1 = document.getElementById("matriz-a1").value;
+            var linha2 = document.getElementById("matriz-a2").value;
+            var linha3 = document.getElementById("matriz-a3").value;
+
+            // separando os valores por vírgula
+            linha1 = linha1.split(',');
+            linha2 = linha2.split(',');
+            linha3 = linha3.split(',');
+
+            // imprime um array de strings, ex: ["1", "2", "3"]
+            console.log(linha1);
+            console.log(linha2);
+            console.log(linha3);
+
+            // verificando se os tamanhos dos arrays é == 3 
+            if(linha1.length == 3 && linha2.length == 3 && linha3.length ==3){
+                // arrays vazios para armazenar os valores
+                a1 = [];
+                a2 = [];
+                a3 = [];
+                // percorrendo os arrays linha1, linh2 e linha 3 
+                // e convertendo seus valores para tipo inteiro, armazenando em novos arrays
+                for(var i = 0; i < 3; i++){
+                    a1.push(parseInt(linha1[i]));
+                    a2.push(parseInt(linha2[i]));
+                    a3.push(parseInt(linha3[i]));
+
+                }
+                // imprime um array de inteiros, ex: [1,2,3]
+                console.log(a1);
+                console.log(a2);
+                console.log(a3);
+
+                // criando um objeto do tipo matriz
+                var matriz = new Matriz(a1,a2,a3);
+
+                // imprimindo resultados em tela
+                document.getElementById("suamatrizaqui").innerHTML=
+                "<h4>Sua matriz:</h4><br><div class='row'>"+ 
+                    "<div class='three columns'>"+a1[0]+"</div>"+
+                    "<div class='three columns'>"+a1[1]+"</div>"+
+                    "<div class='three columns'>"+a1[2]+"</div>"+
+                "</div><br>"+
+                "<div class='row'>" + 
+                    "<div class='three columns'>"+a2[0]+"</div>"+
+                    "<div class='three columns'>"+a2[1]+"</div>"+
+                    "<div class='three columns'>"+a2[2]+"</div>"+
+                "</div><br>"+
+                "<div class='row'>" +
+                    "<div class='three columns'>"+a3[0]+"</div>"+
+                    "<div class='three columns'>"+a3[1]+"</div>"+
+                    "<div class='three columns'>"+a3[2]+"</div>"+
+                "</div><br>";
+
+            } else {
+                // Se o usuário não tiver digitado 3 valores por input, aparecerá uma mensagem de erro
+                window.alert("Você não preencheu os campos das matrizes corretamente.");
+                // e os inputs serão limpos/resetados
+                document.getElementById('matriz-a1').value = '';
+                document.getElementById('matriz-a2').value = '';
+                document.getElementById('matriz-a3').value = '';
+            }
+        }
+    </script>
+</body>
+</html>

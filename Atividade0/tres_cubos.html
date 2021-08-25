@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Samantha Dantas Medeiros">
+    
+    <title>Atividade 0 - 3 Cubos</title>
+  
+    <!-- CSS ------------------------------------------->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poller+One&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet"> 
+    <style>
+        body{
+            font-family: 'Tenor Sans', sans-serif;
+            color: #797A7E;
+            background-color: #fafafa;
+        }
+        h1{
+            margin-top: 3%;
+            /* color: #7394ff; */
+            text-align: center;
+            /* font-family: 'Poller One', cursive; */
+            /* font-size: 80px; */
+        }
+        p {
+            letter-spacing: 3px;
+            text-align: center;
+        }
+        footer {
+            letter-spacing: 3px;
+            text-align: center;
+        }
+        a {
+            color: #f85f73ad;
+            background-color: #fcd8d444;
+            padding: 3px;
+            border-radius: 3px;
+            text-decoration: none;
+            transition: 0.8s;
+        }
+        a:hover {
+            color:#F85F73;
+        }
+        #outro {
+            color: #797A7E;
+            background-color: #3737371e;
+        }
+        #navegar {
+            /* font-size: 21px; */
+            text-align: center;
+            max-width: 200px;
+            background-color: #fcd8d444;
+        }
+        #navegar a{
+            color: #f85f73ad;
+            background-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div id="navegar">
+        <a href="/Atividade 0/cubo_rotacionando.html" title="Cubo Estático"> « questão anterior </a>
+        <a href="/Atividade 0/" title="/Atividade_0/"> ✺ </a>
+    </div> -->
+    <h1>Três Cubos Rotacionando</h1>
+    <center>
+        <p>Clique nos cubos para rotacioná-los</p>
+        <div class="container" id="cubos"></div>
+    </center>
+    <br>
+    <footer>{ Samantha Dantas Medeiros ヽ 08.2021 ✦ <a href="https://github.com/sammid37">GitHub</a> }</footer>
+    <br>
+    <footer>
+            made with 
+            <i><a id="outro" href="http://getskeleton.com/">skeleton</a> 
+            and 
+            <i><a id="outro" href="https://threejs.org/">ThreeJS</a></i>.
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        function cubes() {
+            // criando uma cena
+            var scene = new THREE.Scene();
+            // PerspectiveCamera(fov, aspect, near, fear) são os limites da renderização em pixels
+            var camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000);
+            camera.position.z = 500; // profundidade da câmera
+
+            // Criando os objetos da cena
+            // ----------------- CUBO 1
+            var geometry1 = new THREE.BoxGeometry(100,100,100);
+            var material1 = new THREE.MeshBasicMaterial({ color: 0xFFA5A5, wireframe: true});
+            var cube1 = new THREE.Mesh(geometry1, material1);
+            cube1.position.set(-250,0,0); // estabelcendo a posição do cubo 1
+
+            // ----------------- CUBO 2
+            var geometry2 = new THREE.BoxGeometry(100,100,100);
+            var material2 = new THREE.MeshBasicMaterial({ color: 0x7F78D2, wireframe: true});
+            var cube2 = new THREE.Mesh(geometry2, material2);
+            cube2.position.set(0,0,0); // estabelcendo a posição do cubo 2
+            
+            // CUBO 3
+            var geometry3 = new THREE.BoxGeometry(100,100,100);
+            var material3 = new THREE.MeshBasicMaterial({ color: 0x93B5C6, wireframe: true});
+            var cube3 = new THREE.Mesh(geometry3, material3);
+            cube3.position.set(250,0,0); // estabelcendo a posição do cubo 3
+
+            scene.add(cube1,cube2,cube3); // adicionando os objetos à cena
+
+            // renderização
+            var renderer = new THREE.WebGLRenderer({antialias:true});
+            renderer.setClearColor(0xF5F5F5); // fundo da renderização
+            renderer.setSize(700,310); // tamanho da renderização
+
+            // atribuindo um local de exibição, escolhi um elemento que possi o id "cubos"
+            const exibir = document.getElementById('cubos');
+            exibir.appendChild(renderer.domElement);            
+            
+            // animação, rotacionando
+            function animate(){
+                // atualização de frame
+                id = requestAnimationFrame(animate);
+
+                // rotação dos eixos x e y
+                cube1.rotation.x += 0.01;
+                cube1.rotation.y += 0.02;
+
+                cube2.rotation.x += 0.02;
+                cube2.rotation.y += 0.03;
+
+                cube3.rotation.x += 0.03;
+                cube3.rotation.y += 0.04;
+
+                // renderizando a cena e a câmera
+                renderer.render(scene,camera);
+
+            }
+            // ao clicar na no elemento que possui o id "cubos", os objetos serão animados
+            // clique mais vezes para aumentar a velocidade deles 
+            document.getElementById("cubos").onclick = function() { animate() };
+            renderer.render(scene, camera); // renderizando
+
+        }
+        // chamando a função dos cubos ao iniciar a página
+        window.onload = cubes;
+    </script>
+</body>
+</html>
