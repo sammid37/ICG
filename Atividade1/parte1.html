@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Samantha Dantas Medeiros">
+
+    <title>Atividade 1 - MidPointLineAlgorithm</title>
+
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poller+One&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
+    <style>
+        body{
+            font-family: 'Tenor Sans', sans-serif;
+            color: #fafafa;
+            background-color: #000;
+        }
+        canvas{
+            width: 512px;
+            height: 512px;
+            border: 1px solid gray; 
+            image-rendering: pixelated; 
+            margin-top:20px; 
+            /* position: absolute; 
+            left: 16px; */
+        }
+        a {
+            color: #9399FF;
+            background-color: #9399FF44;
+            padding: 3px;
+            border-radius: 3px;
+            text-decoration: none;
+            transition: 0.8s;
+        }
+        a:hover {
+            color:#9399FF;
+        }
+        footer {
+            letter-spacing: 3px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <canvas id="canvas" width="128" height="128"></canvas>
+    </center>
+    <br>
+    <footer>{ Samantha Dantas Medeiros ヽ 08.2021 ✦ <a href="https://github.com/sammid37">GitHub</a> }</footer>
+
+    
+</body> 
+<script>
+    // CodePen: https://codepen.io/ICG-UFPB/pen/dyWgQoj
+    class Canvas {
+        constructor(canvas_id) {
+            this.canvas = document.getElementById(canvas_id);
+            this.context = this.canvas.getContext("2d");
+            this.clear_color = 'rgba(0,0,0,255)';
+        }
+        clear() {
+            this.context.fillStyle = this.clear_color;
+            this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        }
+        putPixel(x, y, color) {
+            this.context.fillStyle = 'rgb(' + color[0] + ',' + color[1] + ',' + color[2] + ')';
+            this.context.fillRect(x, (this.canvas.height - 1) - y, 1, 1);
+        }
+    }
+    let color_buffer = new Canvas("canvas");
+    color_buffer.clear();
+
+    //---------------------------------------- Implementando funções
+    function MidPointLineAlgorithm(x0, y0, x1, y1, color_0, color_1) {
+        /*
+        Rasteriza uma linha na tela, recebendo como parˆametros as coordenadas de tela 
+        dos seus v ́ertices inicial (x0,y0) e final (x1,y1) e as suas respectivas cores no 
+        formato RGBA (color 0 e color 1). As cores dos pixels ao longo da linha 
+        rasterizada devem ser obtidas por meio de inter-pola ̧c ̃ao linear das cores 
+        dos v ́ertices. O algoritmo de rasteriza ̧c ̃ao de linha a ser implementado
+        deve ser o Algoritmo do Ponto M ́edio, e ele deve funcionar para todos os octantes
+        */
+        var dx = x1 - x0;
+        var dy = y1 - y0;
+        var d = 2 * dy - dx;
+        var inc_L = 2 * dy;
+        var inc_NE = 2 * (dy - dx);
+        var x = x0;
+        var y = y0;
+
+        color_buffer.putPixel(x,y,color_0);
+
+        while (x < x1){
+            if (d <= 0){
+                d += inc_L;
+                color_buffer.putPixel(x,y,color_0);
+                x++;
+            } else {
+                d += inc_NE;
+                x++;
+                y++;
+            }
+            color_buffer.putPixel(x,y,color_0);
+        }
+        // Exemplo de código para acender pixels no canvas:
+        // for (let y = y0; y < y1; ++y){
+        //     for (let x = x0; x < x1; ++x){
+        //         color_buffer.putPixel(x, y, color_0); 
+        //     }
+        // }
+    }
+
+
+    /*
+    Fun ̧c ̃ao que rasteriza as arestas de um triˆangulo na tela, recebendo como parˆametros as
+    coordenadas de tela dos trˆes v ́ertices ((x0,y0), (x1,y1) e (x2,y2)) bem como suas respectivas
+    cores, no formato RGBA (color 0, color 1 e color 2). As cores dos pixels das arestas do
+    triˆangulo devem ser obtidas atrav ́es da interpola ̧c ̃ao linear das cores de seus v ́ertices. 
+    N ̃ao  ́e necess ́ario o preenchimento do triângulo
+    */
+    // function DrawTriangle(x0, y0, x1, y1, x2, y2, color_0, color_1, color_2) {
+    //     // Escreva seu código aqui!  
+    // }
+
+    MidPointLineAlgorithm(25, 30, 100, 80, [255,255,0,255], [255,0,0]);
+    // DrawTriangle();
+
+</script> 
+</html>
