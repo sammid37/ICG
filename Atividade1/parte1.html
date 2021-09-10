@@ -89,54 +89,67 @@
     function MidPointLineAlgorithm(x0, y0, x1, y1, color_0, color_1) {
         var dx = x1 - x0; // delta x
         var dy = y1 - y0; // delta y
-        var d = 2 * dy - dx; // decisão para o 1º pixel
-        var inc_L = 2 * dy; // incremento decisão
-        var inc_NE = 2 * (dy - dx); // incremento decisão
+        var d; // variavel de decisão
+        var i; // para utilizar no laço for
+        // incremento, auxiliar
+        var ix = 1; 
+        var iy = 1;
+        
+
+        // verificando o resultado da variação das coordenadas x e y
+        if (dx < 0) {
+            ix = -ix;
+        }
+        if (dy < 0) {
+            iy = -iy;
+        } 
+        // AJEITAR ESSA PARTE
+        dx = Math.abs(dx);
+	    dy = Math.abs(dy);	
         var x = x0;
         var y = y0;
 
-        // implementação (exercicio 28/08)
-        /*var x_inicio = x0;
-        var y_inicio = y0;
-        var x_fim = x1;
-        var y_fim = y1;*/
+        if (dx > dy) {
+            d = 2 * dy - dx; // decisão para o 1º pixel
 
-        // pinta o pixel de coordenadas (x,y)
-        color_buffer.putPixel(x,y,color_0);
-
-        // sempre incrementando o x
-        while (x_inicio < x1){
-            if (d <= 0){
-                d += inc_L; // caminha para a direita (leste)
-                x++;
-
-            } else {
-                d += inc_NE; // caminha para a diagonal (nordeste)
-                x++;
-                y++;
+            for (i = 0; i < dx; i++){
+                // pinta o pixel de coordenadas (x,y)
+                color_buffer.putPixel(x,y,color_0);
+                if(d < 0){
+                    d += 2 * dy; // caminha para leste
+                } else {
+                    y += iy;
+                    d += 2 * (dy - dx); // caminha para nordeste
+                }
+                x += ix;
             }
-            color_buffer.putPixel(x_inicio,y_inicio,color_0);
-            color_buffer.putPixel(x_fim,y_fim,color_0);
-
+        } 
+        else {
+            d = 2 * dx - dy; // decisão para o 1º pixel 
+            
+            for(i = 0; i < dy; i++){
+                // pinta o pixel de coordenadas (x,y)
+                color_buffer.putPixel(x,y,color_0);
+                if(d < 0) {
+                    d += 2 * dx; // caminha para leste
+                } else {
+                    x += ix;
+                    d += 2 * (dx - dy); // caminha para nordeste
+                }
+                y += iy;
+            }
         }
     }
 
     function DrawTriangle(x0, y0, x1, y1, x2, y2, color_0, color_1, color_2) {
-        // Ascendendo apenas os pontos 
-        /*
-        color_buffer.putPixel(x0,y0,color_0);
-        color_buffer.putPixel(x1,y1,color_1);
-        color_buffer.putPixel(x2,y2,color_2);
-        */
-
         // Desenhando linhas chamando a função do "Algoritmo de Ponto Médio"
         MidPointLineAlgorithm(x0, y0, x1, y1, color_0, color_1);
-        MidPointLineAlgorithm(x2, y2, x0, y0, color_2, color_0);
         MidPointLineAlgorithm(x1, y1, x2, y2, color_1, color_2);
+        MidPointLineAlgorithm(x2, y2, x0, y0, color_2, color_0);
         
     }
 
-    MidPointLineAlgorithm(25, 30, 100, 80, [255,255,0,255], [255,0,0]);
+    // MidPointLineAlgorithm(25, 30, 100, 80, [255,255,0,255], [255,0,0]);
     DrawTriangle(25, 30, 50, 100, 100, 15, [255,0,0,255], [0,0,255,255], [0,255,0,255]);
  
     /*
